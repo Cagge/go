@@ -20,7 +20,6 @@ type UpdateAccInput struct {
 func GetAllAcc(context *gin.Context) {
 	var accs []models.Acc
 	models.DB.Find(&accs)
-
 	context.JSON(http.StatusOK, gin.H{"accs": accs})
 }
 
@@ -30,7 +29,6 @@ func GetAcc(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, gin.H{"error": "Пользователя с таким ID не существует"})
 		return
 	}
-
 	context.JSON(http.StatusOK, gin.H{"accs": acc})
 }
 
@@ -43,7 +41,6 @@ func CreateAcc(context *gin.Context) {
 
 	acc := models.Acc{Name: input.Name, Position: input.Position}
 	models.DB.Create(&acc)
-
 	context.JSON(http.StatusOK, gin.H{"accs": acc})
 }
 
@@ -53,15 +50,12 @@ func UpdateAcc(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, gin.H{"error": "Пользователя с таким ID не существует"})
 		return
 	}
-
 	var input UpdateAccInput
 	if err := context.ShouldBindJSON(&input); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": "Пользователя с таким ID не существует"})
 		return
 	}
-
 	models.DB.Model(&acc).Update(input)
-
 	context.JSON(http.StatusOK, gin.H{"acc": acc})
 }
 
@@ -71,8 +65,6 @@ func DeleteAcc(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, gin.H{"error": "Пользователя с таким ID не существует"})
 		return
 	}
-
 	models.DB.Delete(&acc)
-
 	context.JSON(http.StatusOK, gin.H{"accs": true})
 }
