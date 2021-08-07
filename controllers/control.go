@@ -27,7 +27,7 @@ func GetAllAcc(context *gin.Context) {
 func GetAcc(context *gin.Context) {
 	var acc models.Acc
 	if err := models.DB.Where("id = ?", context.Param("id")).First(&acc).Error; err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": "Запись не существует"})
+		context.JSON(http.StatusBadRequest, gin.H{"error": "Пользователя с таким ID не существует"})
 		return
 	}
 
@@ -37,7 +37,7 @@ func GetAcc(context *gin.Context) {
 func CreateAcc(context *gin.Context) {
 	var input CreateAccInput
 	if err := context.ShouldBindJSON(&input); err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		context.JSON(http.StatusBadRequest, gin.H{"error": "Проверьте ключ и повторите ввод"})
 		return
 	}
 
@@ -50,13 +50,13 @@ func CreateAcc(context *gin.Context) {
 func UpdateAcc(context *gin.Context) {
 	var acc models.Acc
 	if err := models.DB.Where("id = ?", context.Param("id")).First(&acc).Error; err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": "Запись не существует"})
+		context.JSON(http.StatusBadRequest, gin.H{"error": "Пользователя с таким ID не существует"})
 		return
 	}
 
 	var input UpdateAccInput
 	if err := context.ShouldBindJSON(&input); err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		context.JSON(http.StatusBadRequest, gin.H{"error": "Пользователя с таким ID не существует"})
 		return
 	}
 
@@ -68,7 +68,7 @@ func UpdateAcc(context *gin.Context) {
 func DeleteAcc(context *gin.Context) {
 	var acc models.Acc
 	if err := models.DB.Where("id = ?", context.Param("id")).First(&acc).Error; err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": "Запись не существует"})
+		context.JSON(http.StatusBadRequest, gin.H{"error": "Пользователя с таким ID не существует"})
 		return
 	}
 
