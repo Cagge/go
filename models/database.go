@@ -14,6 +14,5 @@ func ConnectDB() {
 		panic("Не удалось подключиться к базе данных")
 	}
 	db.AutoMigrate(&Acc{})
-
 	DB = db
 }

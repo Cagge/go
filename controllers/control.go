@@ -66,5 +66,5 @@ func DeleteAcc(context *gin.Context) {
 		return
 	}
 	models.DB.Delete(&acc)
-	context.JSON(http.StatusOK, gin.H{"accs": true})
+	context.JSON(http.StatusOK, gin.H{"acc": true})
 }
